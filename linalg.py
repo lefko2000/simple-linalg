@@ -57,33 +57,23 @@ class Matrix(list):
         return out
         
     def T(self):
-        r = self.nrow()
-        c = self.ncol()
-        out = Matrix()
-        for i in range(c):
-            vecTemp = Vector()
-            for j in range(r):
-                vecTemp.append(self[j][i])
-            out.append(vecTemp)
-        return out        
+        out = [list(i) for i in zip(*self)]
+        return out
         
-    def mult(self, mat):
+    def prod(self, mat):
         pass
         out = Matrix()
-        r = self.nrow()
-        c = mat.ncol()
-        for i in range(r):
+        for i in self:
             vecTemp = Vector()
-            for j in range(c):
-                vecTemp
+            for j in mat:
+                vecTemp.append(i.scalProd(j))
+            out.append(vecTemp)
+        return out
     
 if __name__ == '__main__':
-    a = Matrix([Vector([1,2]), Vector([3,4])])
-    print a
-    print a.T()
-    print Vector([1,2]).add(Vector([3,4]))
-    print Vector([1,2])
-                
+    a = Matrix([Vector([1,1]), Vector([2,2])])
+    b = Matrix([Vector([1,1]), Vector([1,1])])
+    print a.prod(b)          
     
             
             
